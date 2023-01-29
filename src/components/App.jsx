@@ -1,16 +1,30 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { getContacts } from 'redux/contactsSlice.js';
+import {
+  selectContacts,
+  selectError,
+  selectIsLoading,
+} from 'redux/selectors.js';
 
 import { AppTitle, ContactsTitle, Container } from './App.styled.js';
 import InputForm from 'components/InputForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
+import { fetchContacts } from 'redux/operations.js';
+import Loader from './Loader/Loader.jsx';
 
 const App = () => {
-  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const contacts = useSelector(selectContacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -18,6 +32,7 @@ const App = () => {
       <InputForm />
       <ContactsTitle>Contacts</ContactsTitle>
       <Filter />
+      {isLoading && !error && <Loader />}
       {!!contacts && <ContactList />}
       <ToastContainer />
     </Container>
