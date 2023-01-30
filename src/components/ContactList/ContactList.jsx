@@ -8,8 +8,6 @@ import { StyledList } from './ContactList.styled';
 const ContactList = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
 
-  console.log('VisibleContacts: ', visibleContacts, 'All contacts: ');
-
   return (
     <StyledList>
       {visibleContacts.map(({ id, name, phone }) => (

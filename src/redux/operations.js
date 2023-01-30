@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { MOCK_API_BASE } from './constants';
 
 const instanceMockAPI = axios.create({
-  baseURL: 'https://63d58abc94e769375ba4d451.mockapi.io',
+  baseURL: MOCK_API_BASE,
 });
 
 export const fetchContacts = createAsyncThunk(
@@ -10,6 +11,7 @@ export const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await instanceMockAPI.get('/contacts');
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -34,6 +36,7 @@ export const deleteContact = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       const response = await instanceMockAPI.delete(`/contacts/${contactId}`);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

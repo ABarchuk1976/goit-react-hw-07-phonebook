@@ -8,12 +8,13 @@ import {
   selectError,
   selectIsLoading,
 } from 'redux/selectors.js';
+import { fetchContacts } from 'redux/operations.js';
 
 import { AppTitle, ContactsTitle, Container } from './App.styled.js';
+
 import InputForm from 'components/InputForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
-import { fetchContacts } from 'redux/operations.js';
 import Loader from './Loader/Loader.jsx';
 
 const App = () => {
@@ -29,10 +30,10 @@ const App = () => {
   return (
     <Container>
       <AppTitle>Phonebook</AppTitle>
+      {isLoading && !error && <Loader />}
       <InputForm />
       <ContactsTitle>Contacts</ContactsTitle>
       <Filter />
-      {isLoading && !error && <Loader />}
       {!!contacts && <ContactList />}
       <ToastContainer />
     </Container>

@@ -1,17 +1,18 @@
 import { ThreeCircles } from 'react-loader-spinner';
-import styles from './Loader.module.css';
+
+import { Container } from './Loader.styled';
 
 const Loader = () => {
   return (
-    <div className={styles.container}>
+    <Container>
       <ThreeCircles
-        height="50"
-        width="50"
+        height="40"
+        width="40"
         color="#3f51b5"
         visible={true}
         ariaLabel="three-circles-rotating"
       />
-    </div>
+    </Container>
   );
 };
 

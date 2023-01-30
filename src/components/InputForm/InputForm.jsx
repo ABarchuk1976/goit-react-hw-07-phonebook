@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 import { addContact } from 'redux/operations.js';
 import { selectContacts } from 'redux/selectors.js';
+
 import { Form, StyledInput, StyledLabel, Button } from './InputForm.styled.js';
 
 const InputForm = () => {
@@ -11,6 +12,7 @@ const InputForm = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+
     const form = evt?.target;
     const { name, phone } = form.elements;
     const contactName = name.value;
@@ -21,6 +23,7 @@ const InputForm = () => {
       !contacts.some(contact => contact.name === contactName)
     ) {
       form.reset();
+
       dispatch(addContact({ name: contactName, phone: contactPhone }));
     } else {
       toast.warning('Contact with such name exists yet.');

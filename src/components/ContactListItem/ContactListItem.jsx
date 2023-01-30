@@ -1,7 +1,9 @@
 import { useDispatch } from 'react-redux';
 
 import { deleteContact } from 'redux/operations.js';
+
 import PropTypes from 'prop-types';
+
 import {
   ItemWrapper,
   ItemContact,
